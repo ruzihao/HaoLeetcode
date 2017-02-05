@@ -10,6 +10,7 @@ class Solution(object):
         elif n==0:
             return 1
         else:
-            x = 1
+            y = 1
             for k in range(n):
-                x *= x
+                y *= x
+        return y
