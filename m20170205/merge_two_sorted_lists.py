@@ -17,7 +17,6 @@ class Solution(object):
             return l1
         else:
             p = ListNode(0)
-            import pdb; pdb.set_trace()
             p.next, q = l1, l2
             r = p.next
             while r and q:
