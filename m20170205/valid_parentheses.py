@@ -4,20 +4,24 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        if len(s)%2 != 0:
+        if len(s)==0 or len(s)%2 != 0:
             return False
         valid_dict = {')':'(', '}':'{', ']':'['}
-        count_dict = dict.fromkeys(valid_dict.values(), 0)
+        stack = [''] * len(s)
         valid_set = valid_dict.keys() + valid_dict.values()
-        for ix in range(len(s)):
-            if s[ix] not in valid_set:
+        ix, jx = 0, 0
+        while ix<len(s):
+            if s[ix] not in valid_set or s[jx] not in valid_set:
                 return False
             if s[ix] in valid_dict.values():
-                count_dict[s[ix]] += 1
+                stack[jx] = s[ix]
+                jx += 1
             else:
-                count_dict[valid_dict[s[ix]]] -= 1
-            if any([k<0 for k in count_dict.values()]):
-                return False
-        if any([k!=0 for k in count_dict.values()]):
+                if jx==0 or stack[jx-1]!=valid_dict[s[ix]]:
+                    return False
+                else:
+                    jx -= 1
+            ix += 1
+        if jx>0:
             return False
         return True
