@@ -6,14 +6,18 @@ class Solution(object):
         """
         if len(s)%2 != 0:
             return False
-        valid_dict = {'(':')', '{':'}', '[':']'}
+        valid_dict = {')':'(', '}':'{', ']':'['}
+        count_dict = dict.fromkeys(valid_dict.values(), 0)
         valid_set = valid_dict.keys() + valid_dict.values()
-        ix, jx = 0, len(s)-1
-        while ix<jx:
-            if s[ix] not in valid_set or s[jx] not in valid_set:
+        for ix in range(len(s)):
+            if s[ix] not in valid_set:
                 return False
-            if valid_dict[s[ix]] != s[jx]:
+            if s[ix] in valid_dict.values():
+                count_dict[s[ix]] += 1
+            else:
+                count_dict[valid_dict[s[ix]]] -= 1
+            if any([k<0 for k in count_dict.values()]):
                 return False
-            ix += 1
-            jx -= 1
+        if any([k!=0 for k in count_dict.values()]):
+            return False
         return True
