@@ -14,15 +14,12 @@ class Solution(object):
         elif str[0]=='-':
             pos = False
             str = str[1:]
-        else:
-            str_len = len(str)
-            res = 0
-            for ix, k in enumerate(str):
-                if not (k.isdigit() or k=='.'):
-                    return 0
-                elif k=='.':
-                    return res if pos else -res
-                else:
-                    res += int(k) * 10**(str_len-ix-1)
+            
+        str_len = len(str)
+        res = 0
+        for ix, k in enumerate(str):
+            if not k.isdigit():
+                break
+            res = res*10 + int(k)
         return res if pos else -res
                 
