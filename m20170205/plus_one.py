@@ -10,6 +10,8 @@ class Solution(object):
                 digits[ix] += carr
                 carr = 0
                 break
+            else:
+                digits[ix] = 0
         if carr:
             return [1] + digits
         else:
