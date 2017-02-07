@@ -4,6 +4,8 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
+import sys
+
 class Solution(object):
     def minDepth(self, root):
         """
@@ -15,6 +17,8 @@ class Solution(object):
         return self.check_min_depth(root)
     
     def check_min_depth(self, root):
+        if not root:
+            return sys.maxint
         if not root.left and not root.right:
             return 1
         return min(self.check_min_depth(root.left), self.check_min_depth(root.right)) + 1
