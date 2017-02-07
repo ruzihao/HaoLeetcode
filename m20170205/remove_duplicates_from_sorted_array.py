@@ -10,8 +10,7 @@ class Solution(object):
             ix, jx = 0, 0
             while jx<len(nums):
                 if nums[ix] != nums[jx]:
-                    if ix+1 != jx:
-                        nums[ix+1] = nums[jx]
+                    nums[ix+1] = nums[jx]
                     ix += 1
                 jx += 1
             return ix+1
