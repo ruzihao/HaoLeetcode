@@ -5,12 +5,18 @@ class Solution(object):
         :type val: int
         :rtype: int
         """
-        ix, jx = 0, len(nums)-1
-        while ix<jx:
-            if nums[ix] == val:
-                while nums[jx]==val: 
-                    jx -= 1
-                nums[ix] = nums[jx]
+        jx = len(nums)-1
+        ix = jx
+        if len(nums)==1:
+            return 1 if nums[jx]!=val else 0
+        while ix>=0:
+            if nums[jx] == val:
                 jx -= 1
-            ix += 1
+                ix -= 1
+            else:
+                if nums[ix] != val:
+                    ix -= 1
+                else:
+                    nums[ix] = nums[jx]
+                    jx -= 1
         return jx+1
