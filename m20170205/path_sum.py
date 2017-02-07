@@ -4,7 +4,7 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+ 
 class Solution(object):
     def hasPathSum(self, root, sum):
         """
@@ -14,11 +14,9 @@ class Solution(object):
         """
         if not root:
             return False
-        return self.check_sum(root, sum)
-    
-    def check_sum(self, root, s):
-        if s<0:
-            return False
-        if not root:
-            return s==0
-        return self.check_sum(root.left, s-root.val) or self.check_sum(root.right, s-root.val)
+        else:
+            sum = sum - root.val
+            if not root.left and not root.right:
+                if sum==0:
+                    return True
+            return self.hasPathSum(root.left, sum) or self.hasPathSum(root.right, sum)
