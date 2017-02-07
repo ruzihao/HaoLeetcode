@@ -12,8 +12,13 @@ class Solution(object):
         :type sum: int
         :rtype: bool
         """
-        if sum<0:
+        if not root:
+            return False
+        return self.check_sum(root, sum)
+    
+    def check_sum(self, root, s):
+        if s<0:
             return False
         if not root:
-            return sum==0
-        return self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val)
+            return s==0
+        return self.check_sum(root.left, s-root.val) or self.check_sum(root.right, s-root.val)
